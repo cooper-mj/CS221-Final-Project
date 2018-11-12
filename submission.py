@@ -55,14 +55,14 @@ def clean_data(data_list):
 	# 	index: 11 - Employment Length
 	# 	index: 12 - Home Ownership Status
 	# 	index: 13 - Annual Income
-	# 	Purpose of Loan (discrete set of options, including credit_card, car, small_business, debt_consolidation, other)
+	# 	index: 20 - Purpose of Loan (discrete set of options, including credit_card, car, small_business, debt_consolidation, other)
 	# 	index: 23 - Borrower’s Address State
 	# 	index: 24 - Debt to Income Ratio
 	# 	index: 25 - History of delinquency (binary value indicating borrower delinquency on a loan in the past two years).
 	X = []
 	Y = []
 	for data_point in data_list:
-		updated_data_point_X = [data_point[2], data_point[5][1:-7], data_point[11][:-6], data_point[12], data_point[13], data_point[23], data_point[24], data_point[25]]
+		updated_data_point_X = [data_point[2], data_point[5][1:-7], data_point[11][:-6], data_point[12], data_point[13], data_point[20], data_point[23], data_point[24], data_point[25]]
 		updated_data_point_Y = data_point[9]
 		X.append(updated_data_point_X)
 		Y.append(updated_data_point_Y)
@@ -71,11 +71,5 @@ def clean_data(data_list):
 
 
 
-
-
-
-
-
-
-
-read_data(0.5, 0.25, 0.25)
+if __name__ == "__main__":
+	read_data(0.5, 0.25, 0.25)
