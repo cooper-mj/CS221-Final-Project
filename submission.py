@@ -34,7 +34,11 @@ def read_data(frac_training_set, frac_evaluation_set, frac_test_set):
 
 	# Partition data
 	random.shuffle(ret_list)
-	return ret_list
+	abs_training_set = int(len(ret_list) * frac_training_set)
+	abs_evaluation_set = int(len(ret_list) * frac_evaluation_set)
+	abs_test_set = int(len(ret_list) * frac_test_set)
+	print((ret_list[0:abs_training_set], ret_list[abs_training_set+1:abs_training_set+1+abs_evaluation_set], ret_list[abs_training_set+1+abs_evaluation_set+1:]))
+	return (ret_list[0:abs_training_set], ret_list[abs_training_set+1:abs_training_set+1+abs_evaluation_set], ret_list[abs_training_set+1+abs_evaluation_set+1:])
 
 '''
 Takes in a list of lists representing the dataset - returns a 2-tuple
@@ -51,6 +55,7 @@ def clean_data(data_list):
 	# 	index: 23 - Borrower’s Address State
 	# 	index: 24 - Debt to Income Ratio
 	# 	index: 25 - History of delinquency (binary value indicating borrower delinquency on a loan in the past two years).
+	return
 
 
 
@@ -62,4 +67,4 @@ def clean_data(data_list):
 
 
 
-read_data()
+read_data(0.5, 0.25, 0.25)
