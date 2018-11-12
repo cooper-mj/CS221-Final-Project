@@ -28,7 +28,7 @@ set, (3) Test set. Returns a 3-tuple consisting of the data in that order.
 '''
 def read_data(frac_training_set, frac_evaluation_set, frac_test_set):
 	# Load the data
-	with open('smalldatasettest.csv', 'r') as file:
+	with open('LoanStats3a.csv', 'r') as file:
 	  reader = csv.reader(file)
 	  ret_list = list(reader)[2:] # This [2:] removes text header and individual column headers
 
