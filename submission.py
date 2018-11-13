@@ -21,7 +21,7 @@ The format of each dataset is (X, Y), where X is a list of feature vectors, and 
 list of buckets for multiclass classification.
 '''
 def read_data(frac_training_set, frac_evaluation_set, frac_test_set):
-    
+
     # Error checking - can't have fractions not add up to 1.
     summation = frac_training_set + frac_evaluation_set + frac_test_set
     if summation != 1:
@@ -63,6 +63,9 @@ def clean_data(data_list):
     #   index: 23 - Borrower’s Address State
     #   index: 24 - Debt to Income Ratio
     #   index: 25 - History of delinquency (binary value indicating borrower delinquency on a loan in the past two years).
+    #   
+    # Dependent variable
+    #   index: 9 - Sub Grade (ranges from A1 to G5)
     X = []
     Y = []
     for data_point in data_list:
