@@ -46,7 +46,7 @@ def read_data(frac_training_set, frac_evaluation_set, frac_test_set):
 
     print("Cleaning data . . .")
     ret_list = clean_data(ret_list)
-    print("Data cleaned!")
+    print("\nData cleaned!")
 
     abs_training_set = int(len(ret_list[0]) * frac_training_set)
     abs_evaluation_set = int(len(ret_list[0]) * frac_evaluation_set)
@@ -90,6 +90,9 @@ def clean_data(data_list):
 
     for i, data_point in enumerate(data_list):
         
+        sys.stdout.write("\r%d%%" % int(100*float(i)/float(len(data_list))))
+        sys.stdout.flush()
+
         # Convert data into numeric
         updated_data_point_X = [data_point[2], data_point[5][1:-7], re.sub("[^0-9]", "", data_point[11]), home_ownership_status[data_point[12]], data_point[13], purpose[data_point[20]], data_point[24], data_point[25]]
         
@@ -155,6 +158,7 @@ def stochastic_gradient_descent(dataset_tuple):
     categorized_as = {"A":0, "B":0, "C":0, "D":0, "E":0, "F":0, "G":0}
 
     for i, X in enumerate(evaluation_set[0]):
+
         prediction = clf.predict(np.array([X]))[0]
         grades = {"A1":1, "A2":2, "A3":3, "A4":4, "A5":5, "B1":6, "B2":7, "B3":8, "B4":9, "B5":10, "C1":11, "C2":12, "C3":13, "C4":14, "C5":15, "D1":16, "D2":17, "D3":18, "D4":19, "D5":20, "E1":21, "E2":22, "E3":23, "E4":24, "E5":25, "F1":26, "F2":27, "F3":28, "F4":29, "F5":30, "G1":31, "G2":32, "G3":33, "G4":34, "G5":35, "":-1}
         inverse_grades = ivd = {v: k for k, v in grades.items()}
