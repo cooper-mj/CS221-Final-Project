@@ -14,7 +14,6 @@ import random
 import numpy as np
 import re
 
-
 random.seed(100) # For consistency during development
 
 '''
@@ -105,14 +104,14 @@ def clean_data(data_list):
     return (X, Y)
 
 '''
-Takes in a prediction and comparison, and checks whether or not they are in the same
-general (A-G) grade.
-'''
-def test_categories(prediction, comparison, grades):
-    if len(grades[prediction]) == 0 or len(grades[comparison]) == 0:
-        return False
-    return grades[prediction][0] == grades[comparison][0] 
+Runs stochastic gradient descent on the dataset passed into the function. Trains
+on the training set, evaluates accuracy on the evaluation set.
 
+Evaluates the classification accuracy using two metrics:
+    (1) Sub-grade classification accuracy (e.g. E5).
+    (2) Broad-grade classification accuracy (e.g. B).
+
+'''
 def stochastic_gradient_descent(dataset_tuple):
     # Train
     print("Training . . .")
@@ -138,6 +137,16 @@ def stochastic_gradient_descent(dataset_tuple):
 
 
     # Test - approximate values
+    
+    '''
+    Takes in a prediction and comparison, and checks whether or not they are in the same
+    general (A-G) grade.
+    '''
+    def test_categories(prediction, comparison, grades):
+        if len(grades[prediction]) == 0 or len(grades[comparison]) == 0:
+            return False
+        return grades[prediction][0] == grades[comparison][0]
+
     print("Testing approximate (categorized) values . . .")
     correct = 0
     total = 0
@@ -154,11 +163,11 @@ def stochastic_gradient_descent(dataset_tuple):
 
 
 
-
-
 '''
 Indicates we are running submission.py as a script.
 '''
 if __name__ == "__main__":
+    # Setup our datasets with 0.5 of the dataset going to the training set,
+    # 0.25 going to the evaluation set, and 0.25 going to the test set.
     dataset = read_data(0.5, 0.25, 0.25)
     stochastic_gradient_descent(dataset)
