@@ -143,25 +143,42 @@ def stochastic_gradient_descent(dataset_tuple):
     general (A-G) grade.
     '''
     def test_categories(prediction, comparison, grades):
-        if len(grades[prediction]) == 0 or len(grades[comparison]) == 0:
-            return False
         return grades[prediction][0] == grades[comparison][0]
 
     print("Testing approximate (categorized) values . . .")
     correct = 0
     total = 0
+    grade_counter = {"A":0, "B":0, "C":0, "D":0, "E":0, "F":0, "G":0}
+    grade_counter_correct = {"A":0, "B":0, "C":0, "D":0, "E":0, "F":0, "G":0}
+    categorized_as = {"A":0, "B":0, "C":0, "D":0, "E":0, "F":0, "G":0}
+
     for i, X in enumerate(evaluation_set[0]):
         prediction = clf.predict(np.array([X]))[0]
-
         grades = {"A1":1, "A2":2, "A3":3, "A4":4, "A5":5, "B1":6, "B2":7, "B3":8, "B4":9, "B5":10, "C1":11, "C2":12, "C3":13, "C4":14, "C5":15, "D1":16, "D2":17, "D3":18, "D4":19, "D5":20, "E1":21, "E2":22, "E3":23, "E4":24, "E5":25, "F1":26, "F2":27, "F3":28, "F4":29, "F5":30, "G1":31, "G2":32, "G3":33, "G4":34, "G5":35, "":-1}
         inverse_grades = ivd = {v: k for k, v in grades.items()}
 
+        if len(inverse_grades[prediction]) == 0 or len(inverse_grades[evaluation_set[1][i]]) == 0:
+            continue
+
+        print(inverse_grades[prediction])
+        print(inverse_grades[evaluation_set[1][i]][0])
+        print(grade_counter_correct)
+        print(grade_counter)
+        print("")
         if test_categories(prediction, evaluation_set[1][i], inverse_grades): # 5 is an arbitrary threshold value
             correct += 1
+            grade_counter_correct[inverse_grades[evaluation_set[1][i]][0]] += 1
+
         total += 1
+        grade_counter[inverse_grades[evaluation_set[1][i]][0]] += 1
+        categorized_as[inverse_grades[prediction][0]] += 1
+
     print("Approximate values testing accuracy: " + str(round(float(correct)/float(total), 2)))
 
-
+    for key in grade_counter:
+        if grade_counter[key] > 0:
+            print("Accuracy for category " + str(key) + " : " + str(grade_counter_correct[key]/float(grade_counter[key])))
+    print(categorized_as)
 
 '''
 Indicates we are running submission.py as a script.
