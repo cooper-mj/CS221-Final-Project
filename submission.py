@@ -13,6 +13,7 @@ import csv
 import random
 import numpy as np
 import re
+import sys
 
 random.seed(100) # For consistency during development
 
@@ -87,7 +88,8 @@ def clean_data(data_list):
         return -1
 
 
-    for data_point in data_list:
+    for i, data_point in enumerate(data_list):
+        
         # Convert data into numeric
         updated_data_point_X = [data_point[2], data_point[5][1:-7], re.sub("[^0-9]", "", data_point[11]), home_ownership_status[data_point[12]], data_point[13], purpose[data_point[20]], data_point[24], data_point[25]]
         
