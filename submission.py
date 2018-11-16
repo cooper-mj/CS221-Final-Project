@@ -130,7 +130,7 @@ def stochastic_gradient_descent(dataset_tuple):
     clf.fit(X, Y)
 
     # Test - exact values
-    print("Testing exact values . . .")
+    print("\nTesting exact values . . .")
     correct = 0
     total = 0
     for i, X in enumerate(evaluation_set[0]):
@@ -150,7 +150,7 @@ def stochastic_gradient_descent(dataset_tuple):
     def test_categories(prediction, comparison, grades):
         return grades[prediction][0] == grades[comparison][0]
 
-    print("Testing approximate (categorized) values . . .")
+    print("\nTesting approximate (categorized) values . . .")
     correct = 0
     total = 0
     grade_counter = {"A":0, "B":0, "C":0, "D":0, "E":0, "F":0, "G":0}
@@ -166,11 +166,6 @@ def stochastic_gradient_descent(dataset_tuple):
         if len(inverse_grades[prediction]) == 0 or len(inverse_grades[evaluation_set[1][i]]) == 0:
             continue
 
-        print(inverse_grades[prediction])
-        print(inverse_grades[evaluation_set[1][i]][0])
-        print(grade_counter_correct)
-        print(grade_counter)
-        print("")
         if test_categories(prediction, evaluation_set[1][i], inverse_grades): # 5 is an arbitrary threshold value
             correct += 1
             grade_counter_correct[inverse_grades[evaluation_set[1][i]][0]] += 1
@@ -181,10 +176,15 @@ def stochastic_gradient_descent(dataset_tuple):
 
     print("Approximate values testing accuracy: " + str(round(float(correct)/float(total), 2)))
 
+    print("")
     for key in grade_counter:
         if grade_counter[key] > 0:
             print("Accuracy for category " + str(key) + " : " + str(grade_counter_correct[key]/float(grade_counter[key])))
-    print(categorized_as)
+    
+    print("")
+    for data_point in sorted(categorized_as.keys()):
+        print("Number of data points categorized as " + str(data_point) + " : " + str(categorized_as[data_point]))
+    # print(categorized_as)
 
 '''
 Indicates we are running submission.py as a script.
