@@ -79,7 +79,7 @@ def clean_data(data_list):
     Y = []
     home_ownership_status = {"":-1, "RENT":0, "MORTGAGE":1, "OWN":2, "OTHER":3, "NONE":4}
     purpose = {"":-1, "credit_card":0, "car":1, "small_business":2, "other":3, "wedding":4, "debt_consolidation":5, "home_improvement":6, "major_purchase":7, "medical":8, "moving":9, "vacation":10, "house":11, "renewable_energy":12, "educational":13}
-    grade = {"A1":1, "A2":2, "A3":3, "A4":4, "A5":5, "B1":6, "B2":7, "B3":8, "B4":9, "B5":10, "C1":11, "C2":12, "C3":13, "C4":14, "C5":15, "D1":16, "D2":17, "D3":18, "D4":19, "D5":20, "E1":21, "E2":22, "E3":23, "E4":24, "E5":25, "F1":26, "F2":27, "F3":28, "F4":29, "F5":30, "G1":31, "G2":32, "G3":33, "G4":34, "G5":35, "":-1}
+    grade = {"A1":1, "A2":2, "A3":3, "A4":4, "A5":5, "B1":6, "B2":7, "B3":8, "B4":9, "B5":10, "C1":11, "C2":12, "C3":13, "C4":14, "C5":15, "D1":16, "D2":17, "D3":18, "D4":19, "D5":20, "E1":21, "E2":22, "E3":23, "E4":24, "E5":25, "F1":26, "F2":27, "F3":28, "F4":29, "F5":30, "G1":31, "G2":32, "G3":33, "G4":34, "G5":35, "":0}
     
     def remove_invalid_values(st):
         if len(str(st))>0:
