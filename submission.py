@@ -66,7 +66,7 @@ def clean_data(data_list):
     # Features for extraction
     #   index: 2 - Loan Amount Requested
     #   index: 5 - Term of Loan (take [1:-7] to format the string to get the integer term of the loan in years)
-    #   index: 11 - Employment Length (take [:-6] to format the string to get the integer term of employment in years)
+    #   index: 11 - Employment Length (regex it to take only the numerical values)
     #   index: 12 - Home Ownership Status
     #   index: 13 - Annual Income
     #   index: 20 - Purpose of Loan (discrete set of options, including credit_card, car, small_business, debt_consolidation, other)
