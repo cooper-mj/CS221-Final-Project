@@ -13,6 +13,7 @@ import csv
 import random
 import numpy as np
 import re
+import sys
 
 random.seed(100) # For consistency during development
 
@@ -45,7 +46,7 @@ def read_data(frac_training_set, frac_evaluation_set, frac_test_set):
 
     print("Cleaning data . . .")
     ret_list = clean_data(ret_list)
-    print("Data cleaned!")
+    print("\nData cleaned!")
 
     abs_training_set = int(len(ret_list[0]) * frac_training_set)
     abs_evaluation_set = int(len(ret_list[0]) * frac_evaluation_set)
@@ -65,7 +66,7 @@ def clean_data(data_list):
     # Features for extraction
     #   index: 2 - Loan Amount Requested
     #   index: 5 - Term of Loan (take [1:-7] to format the string to get the integer term of the loan in years)
-    #   index: 11 - Employment Length (take [:-6] to format the string to get the integer term of employment in years)
+    #   index: 11 - Employment Length (regex it to take only the numerical values)
     #   index: 12 - Home Ownership Status
     #   index: 13 - Annual Income
     #   index: 20 - Purpose of Loan (discrete set of options, including credit_card, car, small_business, debt_consolidation, other)
@@ -87,7 +88,11 @@ def clean_data(data_list):
         return -1
 
 
-    for data_point in data_list:
+    for i, data_point in enumerate(data_list):
+        
+        sys.stdout.write("\r%d%%" % int(100*float(i)/float(len(data_list))))
+        sys.stdout.flush()
+
         # Convert data into numeric
         updated_data_point_X = [data_point[2], data_point[5][1:-7], re.sub("[^0-9]", "", data_point[11]), home_ownership_status[data_point[12]], data_point[13], purpose[data_point[20]], data_point[24], data_point[25]]
         
@@ -125,7 +130,7 @@ def stochastic_gradient_descent(dataset_tuple):
     clf.fit(X, Y)
 
     # Test - exact values
-    print("Testing exact values . . .")
+    print("\nTesting exact values . . .")
     correct = 0
     total = 0
     for i, X in enumerate(evaluation_set[0]):
@@ -143,25 +148,44 @@ def stochastic_gradient_descent(dataset_tuple):
     general (A-G) grade.
     '''
     def test_categories(prediction, comparison, grades):
-        if len(grades[prediction]) == 0 or len(grades[comparison]) == 0:
-            return False
         return grades[prediction][0] == grades[comparison][0]
 
-    print("Testing approximate (categorized) values . . .")
+    print("\nTesting approximate (categorized) values . . .")
     correct = 0
     total = 0
-    for i, X in enumerate(evaluation_set[0]):
-        prediction = clf.predict(np.array([X]))[0]
+    grade_counter = {"A":0, "B":0, "C":0, "D":0, "E":0, "F":0, "G":0}
+    grade_counter_correct = {"A":0, "B":0, "C":0, "D":0, "E":0, "F":0, "G":0}
+    categorized_as = {"A":0, "B":0, "C":0, "D":0, "E":0, "F":0, "G":0}
 
-        grades = {"A1":1, "A2":2, "A3":3, "A4":4, "A5":5, "B1":6, "B2":7, "B3":8, "B4":9, "B5":10, "C1":11, "C2":12, "C3":13, "C4":14, "C5":15, "D1":16, "D2":17, "D3":18, "D4":19, "D5":20, "E1":21, "E2":22, "E3":23, "E4":24, "E5":25, "F1":26, "F2":27, "F3":28, "F4":29, "F5":30, "G1":31, "G2":32, "G3":33, "G4":34, "G5":35, "":0}
+    for i, X in enumerate(evaluation_set[0]):
+
+
+        prediction = clf.predict(np.array([X]))[0]
+        grades = {"A1":1, "A2":2, "A3":3, "A4":4, "A5":5, "B1":6, "B2":7, "B3":8, "B4":9, "B5":10, "C1":11, "C2":12, "C3":13, "C4":14, "C5":15, "D1":16, "D2":17, "D3":18, "D4":19, "D5":20, "E1":21, "E2":22, "E3":23, "E4":24, "E5":25, "F1":26, "F2":27, "F3":28, "F4":29, "F5":30, "G1":31, "G2":32, "G3":33, "G4":34, "G5":35, "":-1}
         inverse_grades = ivd = {v: k for k, v in grades.items()}
+
+        if len(inverse_grades[prediction]) == 0 or len(inverse_grades[evaluation_set[1][i]]) == 0:
+            continue
 
         if test_categories(prediction, evaluation_set[1][i], inverse_grades): # 5 is an arbitrary threshold value
             correct += 1
+            grade_counter_correct[inverse_grades[evaluation_set[1][i]][0]] += 1
+
         total += 1
+        grade_counter[inverse_grades[evaluation_set[1][i]][0]] += 1
+        categorized_as[inverse_grades[prediction][0]] += 1
+
     print("Approximate values testing accuracy: " + str(round(float(correct)/float(total), 2)))
 
-
+    print("")
+    for key in grade_counter:
+        if grade_counter[key] > 0:
+            print("Accuracy for category " + str(key) + " : " + str(grade_counter_correct[key]/float(grade_counter[key])))
+    
+    print("")
+    for data_point in sorted(categorized_as.keys()):
+        print("Number of data points categorized as " + str(data_point) + " : " + str(categorized_as[data_point]))
+    # print(categorized_as)
 
 '''
 Indicates we are running submission.py as a script.
