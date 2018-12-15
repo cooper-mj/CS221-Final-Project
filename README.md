@@ -48,9 +48,9 @@ All of the files can be run as Python scripts from the command line:
 
 ## Authors
 
-* **Danny Takeuchi**
-* **Michael Cooper**
-* **Kaushal Alate**
+* Danny Takeuchi
+* Michael Cooper
+* Kaushal Alate
 
 ## Acknowledgments
 
