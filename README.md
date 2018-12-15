@@ -1,12 +1,10 @@
 # CS221-Final-Project
 
-# Project Title
-
 Collection of dataset and three classifiers - linear classifier, k-means classifier, neural net - which classify Lending Club loans into Lending Club risk grades.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for testing and grading purposes.
 
 ## Files in Repository
 
@@ -18,7 +16,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Our classifiers rely on the following Python packages. All can be installed via the pip package manager.
+Our classifiers rely on the following Python packages. All are listed in requirements.txt and can be installed via the pip package manager.
 * PyTorch
 * NumPy
 * SKLearn
@@ -27,25 +25,16 @@ Our classifiers rely on the following Python packages. All can be installed via 
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Install the above packages via pip, then you should be good to go!
 
-Say what the step will be
-
+To install the packages from the requirements.txt file, navigate into the project directory, then type:
 ```
-Give the example
+$ pip install -r requirements.txt
 ```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the classifiers
 
-To run 
+All of the files can be run as Python scripts from the command line.
 
 ## Built With
 
@@ -61,9 +50,8 @@ To run
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Will Bakst, our project mentor.
+* Percy and the entire course staff for a great quarter!
 
 
 
