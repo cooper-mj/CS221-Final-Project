@@ -35,10 +35,10 @@ $ pip install -r requirements.txt
 ## Running the classifiers
 
 All of the files can be run as Python scripts from the command line:
-python NeuralNetwork.py
-python baseline_oracle.py
-python kmeans.py
-python sgd.py
+* python NeuralNetwork.py
+* python baseline_oracle.py
+* python kmeans.py
+* python sgd.py
 
 ## Built With
 
