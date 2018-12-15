@@ -38,9 +38,8 @@ All of the files can be run as Python scripts from the command line.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [PyTorch](https://pytorch.org) - An open source deep learning platform that provides a seamless path from research prototyping to production deployment.
+* [Scikit-Learn](https://scikit-learn.org/stable/) - Open source platform for machine learning in Python.
 
 ## Authors
 
