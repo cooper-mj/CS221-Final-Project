@@ -203,9 +203,9 @@ def stochastic_gradient_descent(dataset_tuple, maxIters):
     print("\nTesting exact values . . .")
     exact_correct = 0
     exact_total = 0
-    for i, X in enumerate(evaluation_set[0]):
+    for i, X in enumerate(test_set[0]):
         prediction = clf.predict(np.array([X]))[0]
-        if prediction == evaluation_set[1][i]:
+        if prediction == test_set[1][i]:
             exact_correct += 1
         exact_total += 1
     print("Exact values testing accuracy: " + str(round(float(exact_correct)/float(exact_total), 2)))
@@ -227,24 +227,24 @@ def stochastic_gradient_descent(dataset_tuple, maxIters):
 
     approximate_correct = 0
     approximate_total = 0
-    for i, X in enumerate(evaluation_set[0]):
+    for i, X in enumerate(test_set[0]):
 
         prediction = clf.predict(np.array([X]))[0]
         grades = {"A1":1, "A2":2, "A3":3, "A4":4, "A5":5, "B1":6, "B2":7, "B3":8, "B4":9, "B5":10, "C1":11, "C2":12, "C3":13, "C4":14, "C5":15, "D1":16, "D2":17, "D3":18, "D4":19, "D5":20, "E1":21, "E2":22, "E3":23, "E4":24, "E5":25, "F1":26, "F2":27, "F3":28, "F4":29, "F5":30, "G1":31, "G2":32, "G3":33, "G4":34, "G5":35, "":0}
         inverse_grades = ivd = {v: k for k, v in grades.items()}
 
-        if len(inverse_grades[prediction]) == 0 or len(inverse_grades[evaluation_set[1][i]]) == 0:
+        if len(inverse_grades[prediction]) == 0 or len(inverse_grades[test_set[1][i]]) == 0:
             # Pass if we have an invalid (empty) value
             continue
 
-        if test_categories(prediction, evaluation_set[1][i], inverse_grades):
+        if test_categories(prediction, test_set[1][i], inverse_grades):
             # If we get it right, increment our correct counter
             approximate_correct += 1
-            grade_counter_correct[inverse_grades[evaluation_set[1][i]][0]] += 1
+            grade_counter_correct[inverse_grades[test_set[1][i]][0]] += 1
 
         # Regardless of whether we got it right or wrong, increment our denominator counter
         approximate_total += 1
-        grade_counter[inverse_grades[evaluation_set[1][i]][0]] += 1
+        grade_counter[inverse_grades[test_set[1][i]][0]] += 1
         categorized_as[inverse_grades[prediction][0]] += 1
 
     print("Approximate values testing accuracy: " + str(round(float(approximate_correct)/float(approximate_total), 2)))
