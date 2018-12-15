@@ -1,0 +1,9 @@
+## Required libraries for Takeuchi, Cooper, Alate
+## CS221-Final-Project
+
+matplotlib==2.2.3
+numpy==1.14.1
+scikit-learn==0.20.1
+sklearn==0.0
+torch==0.4.1
+pandas==0.22.0
