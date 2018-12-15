@@ -11,6 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 * **sgd.py** - code for linear classifier with SGD.
 * **kmeans.py** - code to run k-means classifier.
 * **neuralnet.py** - code for neural net classifier.
+* **baseline_oracle.py** - code for baseline and oracle classifiers.
 * **LoanStats3a.csv** - Lending Club dataset containing loan profiles and risk grade lables for 42,538 loans approved by Lending Club between 2007 and 2011.
 * **smalldatasettest.csv** - Small portion of the above dataset, for early-stage testing purposes.
 
